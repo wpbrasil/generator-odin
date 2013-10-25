@@ -11,8 +11,8 @@ var OdinGenerator = module.exports = function OdinGenerator(args, options, confi
 
     this.on('end', function () {
         this.installDependencies({
-            npm: false,
-            skipInstall: options['skip-install']
+            bower: false,
+            skipInstall: true
         });
     });
 
@@ -202,11 +202,21 @@ OdinGenerator.prototype.replaceSrcPackage = function replaceSrcPackage() {
     packageContent = packageContent.replace(new RegExp(/\"title\"\: \"(.+)\"/ig), '"title": "' + this.themeName + '"');
     packageContent = packageContent.replace(new RegExp(/\"homepage\"\: \"(.+)\"/ig), '"homepage": "' + this.themeURI + '"');
 
-    console.log(packageContent);
-
     rimraf(packageFile, function () {
         done();
     });
 
     this.write(packageFile, packageContent);
+};
+
+OdinGenerator.prototype.removeMdFiles = function replaceSrcPackage() {
+    var done = this.async();
+
+    console.log('Removing markdown files.');
+
+    rimraf('./CHANGELOG.md', function () {});
+
+    rimraf('./README.md', function () {
+        done();
+    });
 };
