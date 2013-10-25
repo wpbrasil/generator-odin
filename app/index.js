@@ -81,23 +81,24 @@ OdinGenerator.prototype.copyFiles = function copyFiles() {
 
 OdinGenerator.prototype.replaceStyle = function replaceStyle() {
     var done = this.async(),
-        styleFile = this.readFileAsString(path.join('.', 'style.css'));
+        styleFile = 'style.css',
+        styleContent = this.readFileAsString(path.join('.', styleFile));
 
     console.log('Updating the style.css...');
 
-    styleFile = styleFile.replace(new RegExp(/Theme Name: .+\n/ig), 'Theme Name: ' + this.themeName + '\n');
-    styleFile = styleFile.replace(new RegExp(/Theme URI: .+\n/ig), 'Theme URI: ' + this.themeURI + '\n');
-    styleFile = styleFile.replace(new RegExp(/Description: .+\n/ig), 'Description: ' + this.themeDescription + '\n');
-    styleFile = styleFile.replace(new RegExp(/Author: .+\n/ig), 'Author: ' + this.authorName + '\n');
-    styleFile = styleFile.replace(new RegExp(/Author URI: .+\n/ig), 'Author URI: ' + this.authorURI + '\n');
-    styleFile = styleFile.replace(new RegExp(/Version: .+\n/ig), 'Version: ' + this.themeVersion + '\n');
-    styleFile = styleFile.replace(new RegExp(/Text Domain: .+\n/ig), 'Text Domain: ' + this.textDomain + '\n');
+    styleContent = styleContent.replace(new RegExp(/Theme Name: .+\n/ig), 'Theme Name: ' + this.themeName + '\n');
+    styleContent = styleContent.replace(new RegExp(/Theme URI: .+\n/ig), 'Theme URI: ' + this.themeURI + '\n');
+    styleContent = styleContent.replace(new RegExp(/Description: .+\n/ig), 'Description: ' + this.themeDescription + '\n');
+    styleContent = styleContent.replace(new RegExp(/Author: .+\n/ig), 'Author: ' + this.authorName + '\n');
+    styleContent = styleContent.replace(new RegExp(/Author URI: .+\n/ig), 'Author URI: ' + this.authorURI + '\n');
+    styleContent = styleContent.replace(new RegExp(/Version: .+\n/ig), 'Version: ' + this.themeVersion + '\n');
+    styleContent = styleContent.replace(new RegExp(/Text Domain: .+\n/ig), 'Text Domain: ' + this.textDomain + '\n');
 
-    rimraf('style.css', function () {
+    rimraf(styleFile, function () {
         done();
     });
 
-    this.write('style.css', styleFile);
+    this.write(styleFile, styleContent);
 };
 
 OdinGenerator.prototype.replaceTextDomain = function replaceTextDomain() {
