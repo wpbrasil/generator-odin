@@ -163,3 +163,26 @@ OdinGenerator.prototype.replaceTextDomain = function replaceTextDomain() {
         });
     }
 };
+
+OdinGenerator.prototype.compileLanguages = function compileLanguages() {
+    if ('odin' !== this.textDomain) {
+        console.log('Updating the languages files...');
+
+        var done = this.async(),
+            exec = require('child_process').exec,
+            ptBRpo = 'languages/pt_BR.po',
+            ptBRmo = 'languages/pt_BR.mo',
+            poFile = this.readFileAsString(path.join('.', ptBRpo));
+
+        poFile = poFile.replace(new RegExp(/\#\@ odin/ig), '#@ ' + this.textDomain);
+
+        rimraf(ptBRpo, function () {
+            done();
+        });
+
+        this.write(ptBRpo, poFile);
+
+        console.log('Compiling the .mo file...');
+        exec('msgfmt -o ' + ptBRmo + ' ' + ptBRpo);
+    }
+};
