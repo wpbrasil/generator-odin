@@ -37,7 +37,7 @@ OdinGenerator.prototype.askFor = function askFor() {
         default: 'https://github.com/wpbrasil/odin'
     }, {
         name: 'themeDescription',
-        message: 'What is the theme URI?',
+        message: 'What is the theme description?',
         default: 'Base theme for development with WordPress.'
     }, {
         name: 'authorName',
@@ -186,4 +186,27 @@ OdinGenerator.prototype.compileLanguages = function compileLanguages() {
         console.log('Compiling the .mo file...');
         exec('msgfmt -o ' + ptBRmo + ' ' + ptBRpo);
     }
+};
+
+OdinGenerator.prototype.replaceSrcPackage = function replaceSrcPackage() {
+    var done = this.async(),
+        packageFile = 'src/package.json',
+        packageContent = this.readFileAsString(path.join('.', packageFile)),
+        slug = this.themeName.toLowerCase().replace(/ /g, '-');
+
+    console.log('Updating the src/package.json...');
+
+    packageContent = packageContent.replace(new RegExp(/\"name\"\: \"(.+)\"/ig), '"name": "' + slug + '"');
+    packageContent = packageContent.replace(new RegExp(/\"description\"\: \"(.+)\"/ig), '"description": "' + this.themeDescription + '"');
+    packageContent = packageContent.replace(new RegExp(/\"version\"\: \"(.+)\"/ig), '"version": "' + this.themeVersion + '"');
+    packageContent = packageContent.replace(new RegExp(/\"title\"\: \"(.+)\"/ig), '"title": "' + this.themeName + '"');
+    packageContent = packageContent.replace(new RegExp(/\"homepage\"\: \"(.+)\"/ig), '"homepage": "' + this.themeURI + '"');
+
+    console.log(packageContent);
+
+    rimraf(packageFile, function () {
+        done();
+    });
+
+    this.write(packageFile, packageContent);
 };
