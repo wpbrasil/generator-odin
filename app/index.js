@@ -192,7 +192,7 @@ OdinGenerator.prototype.replaceSrcPackage = function replaceSrcPackage() {
     var done = this.async(),
         packageFile = 'src/package.json',
         packageContent = this.readFileAsString(path.join('.', packageFile)),
-        slug = this.themeName.toLowerCase().replace(/ /g, '-');
+        slug = (this.themeName + '').toLowerCase().replace(/ /g, '-');
 
     console.log('Updating the src/package.json...');
 
