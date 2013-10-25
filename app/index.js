@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var rimraf = require('rimraf');
+var fs = require('fs');
 
 
 var OdinGenerator = module.exports = function OdinGenerator(args, options, config) {
@@ -82,6 +83,8 @@ OdinGenerator.prototype.replaceStyle = function replaceStyle() {
     var done = this.async(),
         styleFile = this.readFileAsString(path.join('.', 'style.css'));
 
+    console.log('Updating the style.css...');
+
     styleFile = styleFile.replace(new RegExp(/Theme Name: .+\n/ig), 'Theme Name: ' + this.themeName + '\n');
     styleFile = styleFile.replace(new RegExp(/Theme URI: .+\n/ig), 'Theme URI: ' + this.themeURI + '\n');
     styleFile = styleFile.replace(new RegExp(/Description: .+\n/ig), 'Description: ' + this.themeDescription + '\n');
@@ -95,4 +98,68 @@ OdinGenerator.prototype.replaceStyle = function replaceStyle() {
     });
 
     this.write('style.css', styleFile);
+};
+
+OdinGenerator.prototype.replaceTextDomain = function replaceTextDomain() {
+    var self = this;
+
+    if ('odin' !== self.textDomain) {
+        console.log('Updating the textdomain in all files...');
+
+        var walk = function (dir, done) {
+            var files = [];
+
+            fs.readdir(dir, function (err, list) {
+                if (err) {
+                    return console.log(err);
+                }
+
+                var i = 0;
+
+                (function next() {
+                    var file = list[i++];
+                    if (!file) {
+                        return done(null, files);
+                    }
+
+                    file = dir + '/' + file;
+                    fs.stat(file, function (err, stat) {
+                        if (stat && stat.isDirectory()) {
+                            walk(file, function (err, res) {
+                                files = files.concat(res);
+                                next();
+                            });
+                        } else {
+                            files.push(file);
+                            next();
+                        }
+                    });
+                })();
+            });
+        };
+
+        walk('.', function (err, files) {
+            if (err) {
+                return console.log(err);
+            }
+
+            files.forEach(function (file) {
+                if ('.php' === path.extname(file)) {
+                    fs.readFile(file, 'utf8', function (err, text) {
+                        if (err) {
+                            return console.log(err);
+                        }
+
+                        var newText = text.replace(new RegExp(/'odin'/ig), '\'' + self.textDomain + '\'');
+
+                        fs.writeFile(file, newText, 'utf8', function (err) {
+                            if (err) {
+                                return console.log(err);
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    }
 };
