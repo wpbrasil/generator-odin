@@ -1,6 +1,6 @@
 # Generator Odin [![Build Status](https://secure.travis-ci.org/wpbrasil/generator-odin.png?branch=master)](https://travis-ci.org/wpbrasil/generator-odin)
 
-Odin generator for [Yeoman](http://yeoman.io).
+[Odin](http://wpod.in/) generator for [Yeoman](http://yeoman.io).
 
 ## Getting Started ##
 
@@ -38,6 +38,12 @@ yo odin
 ```
 
 And send a Pull Request o/
+
+## Changelog ##
+
+== 1.0.0 - 25/10/13 ==
+
+* Initial release.
 
 ## License ##
 
