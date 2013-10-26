@@ -23,7 +23,7 @@ cd /path/to/wordpress/wp-content/themes/theme-name
 yo odin
 ```
 
-![](http://i.imgur.com/HNyeHla.png)
+![](http://i.imgur.com/9iqVrMX.png)
 
 ## Contribute ##
 
@@ -41,7 +41,15 @@ And send a Pull Request o/
 
 ## Changelog ##
 
-== 1.0.0 - 25/10/13 ==
+##### 1.0.1 - 26/10/13 #####
+
+* Removed Yeoman welcome message and added a custom message.
+* Updated the generator settings.
+* Added inline documentation.
+* Fixed indentation size.
+* Added validation for URIs in settings method.
+
+##### 1.0.0 - 25/10/13 #####
 
 * Initial release.
 
