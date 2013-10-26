@@ -30,7 +30,7 @@ yo odin
 Test for development:
 
 ```bash
-git clone git@github.com:claudiosmweb/generator-odin.git
+git clone git@github.com:wpbrasil/generator-odin.git
 cd generator-odin
 [sudo] npm link
 cd /path/to/your/project/
