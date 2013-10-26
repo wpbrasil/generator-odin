@@ -6,7 +6,13 @@ var rimraf = require('rimraf');
 var fs = require('fs');
 var chalk = require('chalk');
 
-
+/**
+ * OdinGenerator class.
+ * Extends the Yeoman Generators Base class.
+ *
+ * @param  {String|Array} args
+ * @param  {Object} options
+ */
 var OdinGenerator = module.exports = function OdinGenerator(args, options, config) {
     yeoman.generators.Base.apply(this, arguments);
 
@@ -22,6 +28,9 @@ var OdinGenerator = module.exports = function OdinGenerator(args, options, confi
 
 util.inherits(OdinGenerator, yeoman.generators.Base);
 
+/**
+ * Generator prompt settings.
+ */
 OdinGenerator.prototype.settings = function settings() {
     var done = this.async();
 
@@ -86,6 +95,9 @@ OdinGenerator.prototype.settings = function settings() {
     }.bind(this));
 };
 
+/**
+ * Checkout the Odin in GitHub and copy to project directory.
+ */
 OdinGenerator.prototype.copyFiles = function copyFiles() {
     var done = this.async();
 
@@ -95,6 +107,9 @@ OdinGenerator.prototype.copyFiles = function copyFiles() {
     });
 };
 
+/**
+ * Fill style.css header data.
+ */
 OdinGenerator.prototype.replaceStyle = function replaceStyle() {
     var done = this.async(),
         styleFile = 'style.css',
@@ -117,6 +132,9 @@ OdinGenerator.prototype.replaceStyle = function replaceStyle() {
     this.write(styleFile, styleContent);
 };
 
+/**
+ * Replace the textdomain in all .php files.
+ */
 OdinGenerator.prototype.replaceTextDomain = function replaceTextDomain() {
     var self = this;
 
@@ -181,6 +199,9 @@ OdinGenerator.prototype.replaceTextDomain = function replaceTextDomain() {
     }
 };
 
+/**
+ * Replace textdomain in pt_BR.po and compile to pt_BR.mo.
+ */
 OdinGenerator.prototype.compileLanguages = function compileLanguages() {
     if ('odin' !== this.textDomain) {
         console.log('Updating the languages files...');
@@ -204,6 +225,9 @@ OdinGenerator.prototype.compileLanguages = function compileLanguages() {
     }
 };
 
+/**
+ * Fill src/package.json data.
+ */
 OdinGenerator.prototype.replaceSrcPackage = function replaceSrcPackage() {
     var done = this.async(),
         packageFile = 'src/package.json',
@@ -225,7 +249,10 @@ OdinGenerator.prototype.replaceSrcPackage = function replaceSrcPackage() {
     this.write(packageFile, packageContent);
 };
 
-OdinGenerator.prototype.removeMdFiles = function replaceSrcPackage() {
+/**
+ * Remove markdown files.
+ */
+OdinGenerator.prototype.removeMdFiles = function removeMdFiles() {
     var done = this.async();
 
     console.log('Removing markdown files.');
