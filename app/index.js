@@ -33,6 +33,10 @@ util.inherits(OdinGenerator, yeoman.generators.Base);
  */
 OdinGenerator.prototype.settings = function settings() {
   var done = this.async();
+  var testUri = function (input) {
+    var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    return (pattern.test(input)) ? true : false;
+  };
 
   // Show odin message.
   console.log('\n              ' + chalk.bold.gray('`:XXXXXX/-`') + '\n' +
@@ -58,7 +62,16 @@ OdinGenerator.prototype.settings = function settings() {
   }, {
     name: 'themeURI',
     message: 'Theme URI:',
-    default: 'https://github.com/wpbrasil/odin'
+    default: 'https://github.com/wpbrasil/odin',
+    validate: function (input) {
+      var done = this.async();
+
+      if (!testUri(input)) {
+        done('Enter with a valid URI');
+        return;
+      }
+      done(true);
+    }
   }, {
     name: 'themeDescription',
     message: 'Theme description:',
@@ -70,7 +83,16 @@ OdinGenerator.prototype.settings = function settings() {
   }, {
     name: 'authorURI',
     message: 'Author URI:',
-    default: 'http://www.facebook.com/groups/wordpress.brasil/'
+    default: 'http://www.facebook.com/groups/wordpress.brasil/',
+    validate: function (input) {
+      var done = this.async();
+
+      if (!testUri(input)) {
+        done('Enter with a valid URI');
+        return;
+      }
+      done(true);
+    }
   }, {
     name: 'themeVersion',
     message: 'Version:',
