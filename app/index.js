@@ -4,6 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var rimraf = require('rimraf');
 var fs = require('fs');
+var chalk = require('chalk');
 
 
 var OdinGenerator = module.exports = function OdinGenerator(args, options, config) {
@@ -21,42 +22,57 @@ var OdinGenerator = module.exports = function OdinGenerator(args, options, confi
 
 util.inherits(OdinGenerator, yeoman.generators.Base);
 
-OdinGenerator.prototype.askFor = function askFor() {
+OdinGenerator.prototype.settings = function settings() {
     var done = this.async();
 
-    // have Yeoman greet the user.
-    console.log(this.yeoman);
+    // Show odin message.
+    console.log('\n              ' + chalk.bold.gray('`:XXXXXX/-`') + '\n' +
+                '            ' + chalk.bold.gray('.XXXX/`') + '\n' +
+                '           ' + chalk.bold.gray('/XXX./XX.') + '\n' +
+                '          ' + chalk.bold.gray('/XXX. XXXX-') + '            ' + chalk.bold.blue('`XXXXX`         /XX- `XX+            \n') +
+                '          ' + chalk.bold.gray('XXXXXX.XXXX`') + '         ' + chalk.bold.blue('.XXXXXXXXX`       XXXX .XXX  XX  XXX   \n') +
+                chalk.bold.gray('`        :XXXXXX.`XXX-X+.') + '     ' + chalk.bold.blue('.XXXX-.-XXXX  :XXXXXXXX -XXX  XXXXXXXX- \n') +
+                chalk.bold.gray('+`     .XXXXXX/- .XXX.XXXX`') + '   ' + chalk.bold.blue('/XXX    /XXX .XXX+/XXXX :XXX  XXXX:XXXX \n') +
+                chalk.bold.gray('.X-   .XXXX/.:X+. -++ .XXXX`') + '  ' + chalk.bold.blue('-XXX-   XXXX /XXX  XXXX :XXX  XXX- -XXX \n') +
+                ' ' + chalk.bold.gray('.XX:.XXX+` -XXXXXX:---.:XXX') + '   ' + chalk.bold.blue('XXXXXXXXXX: `XXXXXXXXX :XXX  XXX. -XXX \n') +
+                '  ' + chalk.bold.gray('`+XXXXX+XXXXXXXXXXXXXX./XX`') + '   ' + chalk.bold.blue('./XXXXX:`   .+XX/-XX: .XX+  XXX` .XXX \n') +
+                '    ' + chalk.bold.gray('`./XXXXXXXX:.-/XXXX+-.XX') + ' \n' +
+                '          ' + chalk.bold.gray('``             /X/') + ' \n' +
+                '                        ' + chalk.bold.gray('-X:') + ' \n' +
+                '                       ' + chalk.bold.gray(':/`') + ' \n');
 
+    // set the options.
     var prompts = [{
         name: 'themeName',
-        message: 'What is the theme name?',
+        message: 'Theme Name:',
         default: 'Odin'
     }, {
         name: 'themeURI',
-        message: 'What is the theme URI?',
+        message: 'Theme URI:',
         default: 'https://github.com/wpbrasil/odin'
     }, {
         name: 'themeDescription',
-        message: 'What is the theme description?',
+        message: 'Theme description:',
         default: 'Base theme for development with WordPress.'
     }, {
         name: 'authorName',
-        message: 'What is the author name?',
+        message: 'Author:',
         default: 'Grupo WordPress Brasil'
     }, {
         name: 'authorURI',
-        message: 'What is the author URI?',
+        message: 'Author URI:',
         default: 'http://www.facebook.com/groups/wordpress.brasil/'
     }, {
         name: 'themeVersion',
-        message: 'What is the theme version?',
+        message: 'Version:',
         default: '1.0.0'
     }, {
         name: 'textDomain',
-        message: 'What is the theme text domain?',
+        message: 'Text domain:',
         default: 'odin'
     }];
 
+    // set the class variables.
     this.prompt(prompts, function (props) {
         this.themeName = props.themeName;
         this.themeURI = props.themeURI;

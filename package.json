@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "yeoman-generator": "~0.13.0",
-    "rimraf": "~2.2.2"
+    "rimraf": "~2.2.2",
+    "chalk": "~0.3.0"
   },
   "devDependencies": {
     "mocha": "~1.12.0"
