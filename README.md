@@ -41,6 +41,10 @@ And send a Pull Request o/
 
 ## Changelog ##
 
+##### 1.0.2 - 31/10/13 #####
+
+* Updated the Odin version to 2.1.2.
+
 ##### 1.0.1 - 26/10/13 #####
 
 * Removed Yeoman welcome message and added a custom message.
