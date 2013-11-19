@@ -41,6 +41,10 @@ And send a Pull Request o/
 
 ## Changelog ##
 
+##### 1.0.4 - 31/10/13 #####
+
+* Updated the Odin version to 2.1.5.
+
 ##### 1.0.3 - 31/10/13 #####
 
 * Updated the Odin version to 2.1.3.
