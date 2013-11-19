@@ -123,7 +123,7 @@ OdinGenerator.prototype.settings = function settings() {
 OdinGenerator.prototype.copyFiles = function copyFiles() {
   var done = this.async();
 
-  this.remote('wpbrasil', 'odin', '2.1.3', function (err, remote) {
+  this.remote('wpbrasil', 'odin', '2.1.5', function (err, remote) {
     remote.directory('.', '.');
     done();
   });
