@@ -41,19 +41,19 @@ And send a Pull Request o/
 
 ## Changelog ##
 
-##### 1.0.4 - 31/10/13 #####
+##### 1.1.0 - 2025/01/20 #####
 
-* Updated the Odin version to 2.1.5.
+* Updated the Odin version to 2.3.0.
 
-##### 1.0.3 - 31/10/13 #####
+##### 1.0.3 - 2013/10/31 #####
 
 * Updated the Odin version to 2.1.3.
 
-##### 1.0.2 - 31/10/13 #####
+##### 1.0.2 - 2013/10/31 #####
 
 * Updated the Odin version to 2.1.2.
 
-##### 1.0.1 - 26/10/13 #####
+##### 1.0.1 - 2013/10/26 #####
 
 * Removed Yeoman welcome message and added a custom message.
 * Updated the generator settings.
@@ -61,7 +61,7 @@ And send a Pull Request o/
 * Fixed indentation size.
 * Added validation for URIs in settings method.
 
-##### 1.0.0 - 25/10/13 #####
+##### 1.0.0 - 2013/10/25 #####
 
 * Initial release.
 
